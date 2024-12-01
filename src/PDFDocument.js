@@ -1,4 +1,5 @@
 import PDFKit from '@foliojs-fork/pdfkit';
+import { deasync } from 'deasync';
 
 const typeName = (bold, italics) => {
 	let type = 'normal';
@@ -84,6 +85,11 @@ class PDFDocument extends PDFKit {
 
 	provideImage(src) {
 		const realImageSrc = src => {
+
+			if (_isStream(src)) {
+				return _readStreamSync(src);
+			}
+
 			let image = this.images[src];
 
 			if (!image) {
@@ -121,6 +127,39 @@ class PDFDocument extends PDFKit {
 		this._imageRegistry[src] = image;
 
 		return image;
+	}
+
+	_isStream(obj) {
+		return obj && typeof obj.pipe === 'function' && typeof obj.on === 'function';
+	}
+
+	_readStreamSync(stream) {
+		let done = false;
+		let result = null;
+		let error = null;
+
+		_readStream(stream)
+			.then((data) => {
+				result = data;
+				done = true;
+			})
+			.catch((err) => {
+				error = err;
+				done = true;
+			});
+		deasync.loopWhile(() => !done);
+		if (error) {
+			throw error;
+		}
+		return result;
+	}
+	_readStream(stream) {
+		return new Promise((resolve, reject) => {
+			const chunks = [];
+			stream.on('data', (chunk) => chunks.push(chunk));
+			stream.on('end', () => resolve(Buffer.concat(chunks)));
+			stream.on('error', reject);
+		});
 	}
 
 	/**
