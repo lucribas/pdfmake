@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs');
+var deasync = require('deasync');
 
 function ImageMeasure(pdfKitDoc, imageDictionary) {
 	this.pdfKitDoc = pdfKitDoc;
@@ -37,7 +38,12 @@ ImageMeasure.prototype.measureImage = function (src) {
 
 	return imageSize;
 
-	function realImageSrc(src) {
+    function realImageSrc(src) {
+
+		if (_isStream(src)) {
+			return _readStreamSync(src);
+		}
+
 		var img = that.imageDictionary[src];
 
 		if (!img) {
@@ -58,6 +64,39 @@ ImageMeasure.prototype.measureImage = function (src) {
 		}
 
 		return Buffer.from(img.substring(index + 7), 'base64');
+	}
+
+	function _isStream(obj) {
+		return obj && typeof obj.pipe === 'function' && typeof obj.on === 'function';
+	}
+
+	function _readStreamSync(stream) {
+		let done = false;
+		let result = null;
+		let error = null;
+
+		_readStream(stream)
+			.then((data) => {
+				result = data;
+				done = true;
+			})
+			.catch((err) => {
+				error = err;
+				done = true;
+			});
+		deasync.loopWhile(() => !done);
+		if (error) {
+			throw error;
+		}
+		return result;
+	}
+	function _readStream(stream) {
+		return new Promise((resolve, reject) => {
+			const chunks = [];
+			stream.on('data', (chunk) => chunks.push(chunk));
+			stream.on('end', () => resolve(Buffer.concat(chunks)));
+			stream.on('error', reject);
+		});
 	}
 };
 
