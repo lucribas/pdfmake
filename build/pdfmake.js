@@ -15141,6 +15141,16 @@ if ( true && module && typeof module.exports !== 'undefined') {
 "use strict";
 
 
+__webpack_require__(65292);
+__webpack_require__(73844);
+__webpack_require__(35877);
+__webpack_require__(69330);
+__webpack_require__(38178);
+__webpack_require__(24863);
+__webpack_require__(43448);
+__webpack_require__(63956);
+__webpack_require__(71950);
+__webpack_require__(68067);
 __webpack_require__(49063);
 __webpack_require__(97514);
 __webpack_require__(11765);
@@ -15156,6 +15166,9 @@ __webpack_require__(58281);
 __webpack_require__(28356);
 __webpack_require__(42437);
 __webpack_require__(94712);
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == typeof h && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator.return && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(typeof e + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, catch: function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 var TraversalTracker = __webpack_require__(2318);
 var DocPreprocessor = __webpack_require__(98883);
 var DocMeasure = __webpack_require__(42526);
@@ -15212,130 +15225,234 @@ LayoutBuilder.prototype.registerTableLayouts = function (tableLayouts) {
  * @param {Object} defaultStyle default style definition
  * @return {Array} an array of pages
  */
-LayoutBuilder.prototype.layoutDocument = function (docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark, pageBreakBeforeFct) {
-  function addPageBreaksIfNecessary(linearNodeList, pages) {
-    if (!isFunction(pageBreakBeforeFct)) {
-      return false;
-    }
-    linearNodeList = linearNodeList.filter(function (node) {
-      return node.positions.length > 0;
-    });
-    linearNodeList.forEach(function (node) {
-      var nodeInfo = {};
-      ['id', 'text', 'ul', 'ol', 'table', 'image', 'qr', 'canvas', 'svg', 'columns', 'headlineLevel', 'style', 'pageBreak', 'pageOrientation', 'width', 'height'].forEach(function (key) {
-        if (node[key] !== undefined) {
-          nodeInfo[key] = node[key];
-        }
-      });
-      nodeInfo.startPosition = node.positions[0];
-      nodeInfo.pageNumbers = Array.from(new Set(node.positions.map(function (node) {
-        return node.pageNumber;
-      })));
-      nodeInfo.pages = pages.length;
-      nodeInfo.stack = isArray(node.stack);
-      node.nodeInfo = nodeInfo;
-    });
-    for (var index = 0; index < linearNodeList.length; index++) {
-      var node = linearNodeList[index];
-      if (node.pageBreak !== 'before' && !node.pageBreakCalculated) {
-        node.pageBreakCalculated = true;
-        var pageNumber = node.nodeInfo.pageNumbers[0];
-        var followingNodesOnPage = [];
-        var nodesOnNextPage = [];
-        var previousNodesOnPage = [];
-        if (pageBreakBeforeFct.length > 1) {
-          for (var ii = index + 1, l = linearNodeList.length; ii < l; ii++) {
-            if (linearNodeList[ii].nodeInfo.pageNumbers.indexOf(pageNumber) > -1) {
-              followingNodesOnPage.push(linearNodeList[ii].nodeInfo);
+LayoutBuilder.prototype.layoutDocument = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark, pageBreakBeforeFct) {
+    var addPageBreaksIfNecessary, resetXYs, result;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          resetXYs = function _resetXYs(result) {
+            result.linearNodeList.forEach(function (node) {
+              node.resetXY();
+            });
+          };
+          addPageBreaksIfNecessary = function _addPageBreaksIfNeces(linearNodeList, pages) {
+            if (!isFunction(pageBreakBeforeFct)) {
+              return false;
             }
-            if (pageBreakBeforeFct.length > 2 && linearNodeList[ii].nodeInfo.pageNumbers.indexOf(pageNumber + 1) > -1) {
-              nodesOnNextPage.push(linearNodeList[ii].nodeInfo);
+            linearNodeList = linearNodeList.filter(function (node) {
+              return node.positions.length > 0;
+            });
+            linearNodeList.forEach(function (node) {
+              var nodeInfo = {};
+              ['id', 'text', 'ul', 'ol', 'table', 'image', 'qr', 'canvas', 'svg', 'columns', 'headlineLevel', 'style', 'pageBreak', 'pageOrientation', 'width', 'height'].forEach(function (key) {
+                if (node[key] !== undefined) {
+                  nodeInfo[key] = node[key];
+                }
+              });
+              nodeInfo.startPosition = node.positions[0];
+              nodeInfo.pageNumbers = Array.from(new Set(node.positions.map(function (node) {
+                return node.pageNumber;
+              })));
+              nodeInfo.pages = pages.length;
+              nodeInfo.stack = isArray(node.stack);
+              node.nodeInfo = nodeInfo;
+            });
+            for (var index = 0; index < linearNodeList.length; index++) {
+              var node = linearNodeList[index];
+              if (node.pageBreak !== 'before' && !node.pageBreakCalculated) {
+                node.pageBreakCalculated = true;
+                var pageNumber = node.nodeInfo.pageNumbers[0];
+                var followingNodesOnPage = [];
+                var nodesOnNextPage = [];
+                var previousNodesOnPage = [];
+                if (pageBreakBeforeFct.length > 1) {
+                  for (var ii = index + 1, l = linearNodeList.length; ii < l; ii++) {
+                    if (linearNodeList[ii].nodeInfo.pageNumbers.indexOf(pageNumber) > -1) {
+                      followingNodesOnPage.push(linearNodeList[ii].nodeInfo);
+                    }
+                    if (pageBreakBeforeFct.length > 2 && linearNodeList[ii].nodeInfo.pageNumbers.indexOf(pageNumber + 1) > -1) {
+                      nodesOnNextPage.push(linearNodeList[ii].nodeInfo);
+                    }
+                  }
+                }
+                if (pageBreakBeforeFct.length > 3) {
+                  for (var ii = 0; ii < index; ii++) {
+                    if (linearNodeList[ii].nodeInfo.pageNumbers.indexOf(pageNumber) > -1) {
+                      previousNodesOnPage.push(linearNodeList[ii].nodeInfo);
+                    }
+                  }
+                }
+                if (pageBreakBeforeFct(node.nodeInfo, followingNodesOnPage, nodesOnNextPage, previousNodesOnPage)) {
+                  node.pageBreak = 'before';
+                  return true;
+                }
+              }
             }
+            return false;
+          };
+          this.docPreprocessor = new DocPreprocessor();
+          this.docMeasure = new DocMeasure(fontProvider, styleDictionary, defaultStyle, this.imageMeasure, this.svgMeasure, this.tableLayouts, images);
+          _context.next = 6;
+          return this.tryLayoutDocument(docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark);
+        case 6:
+          result = _context.sent;
+        case 7:
+          if (!addPageBreaksIfNecessary(result.linearNodeList, result.pages)) {
+            _context.next = 14;
+            break;
           }
-        }
-        if (pageBreakBeforeFct.length > 3) {
-          for (var ii = 0; ii < index; ii++) {
-            if (linearNodeList[ii].nodeInfo.pageNumbers.indexOf(pageNumber) > -1) {
-              previousNodesOnPage.push(linearNodeList[ii].nodeInfo);
-            }
-          }
-        }
-        if (pageBreakBeforeFct(node.nodeInfo, followingNodesOnPage, nodesOnNextPage, previousNodesOnPage)) {
-          node.pageBreak = 'before';
-          return true;
-        }
+          resetXYs(result);
+          _context.next = 11;
+          return this.tryLayoutDocument(docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark);
+        case 11:
+          result = _context.sent;
+          _context.next = 7;
+          break;
+        case 14:
+          return _context.abrupt("return", result.pages);
+        case 15:
+        case "end":
+          return _context.stop();
       }
-    }
-    return false;
-  }
-  this.docPreprocessor = new DocPreprocessor();
-  this.docMeasure = new DocMeasure(fontProvider, styleDictionary, defaultStyle, this.imageMeasure, this.svgMeasure, this.tableLayouts, images);
-  function resetXYs(result) {
-    result.linearNodeList.forEach(function (node) {
-      node.resetXY();
-    });
-  }
-  var result = this.tryLayoutDocument(docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark);
-  while (addPageBreaksIfNecessary(result.linearNodeList, result.pages)) {
-    resetXYs(result);
-    result = this.tryLayoutDocument(docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark);
-  }
-  return result.pages;
-};
-LayoutBuilder.prototype.tryLayoutDocument = function (docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark, pageBreakBeforeFct) {
-  this.linearNodeList = [];
-  docStructure = this.docPreprocessor.preprocessDocument(docStructure);
-  docStructure = this.docMeasure.measureDocument(docStructure);
-  this.writer = new PageElementWriter(new DocumentContext(this.pageSize, this.pageMargins), this.tracker);
-  var _this = this;
-  this.writer.context().tracker.startTracking('pageAdded', function () {
-    _this.addBackground(background);
-  });
-  this.addBackground(background);
-  this.processNode(docStructure);
-  this.addHeadersAndFooters(header, footer);
-  if (watermark != null) {
-    this.addWatermark(watermark, fontProvider, defaultStyle);
-  }
-  return {
-    pages: this.writer.context().pages,
-    linearNodeList: this.linearNodeList
+    }, _callee, this);
+  }));
+  return function (_x, _x2, _x3, _x4, _x5, _x6, _x7, _x8, _x9, _x10) {
+    return _ref.apply(this, arguments);
   };
-};
-LayoutBuilder.prototype.addBackground = function (background) {
-  var backgroundGetter = isFunction(background) ? background : function () {
-    return background;
+}();
+LayoutBuilder.prototype.tryLayoutDocument = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark, pageBreakBeforeFct) {
+    var _this;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          this.linearNodeList = [];
+          docStructure = this.docPreprocessor.preprocessDocument(docStructure);
+          _context3.next = 4;
+          return this.docMeasure.measureDocument(docStructure);
+        case 4:
+          docStructure = _context3.sent;
+          this.writer = new PageElementWriter(new DocumentContext(this.pageSize, this.pageMargins), this.tracker);
+          _this = this;
+          this.writer.context().tracker.startTracking('pageAdded', /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+              while (1) switch (_context2.prev = _context2.next) {
+                case 0:
+                  _context2.next = 2;
+                  return _this.addBackground(background);
+                case 2:
+                case "end":
+                  return _context2.stop();
+              }
+            }, _callee2);
+          })));
+          _context3.next = 10;
+          return this.addBackground(background);
+        case 10:
+          this.processNode(docStructure);
+          this.addHeadersAndFooters(header, footer);
+          if (watermark != null) {
+            this.addWatermark(watermark, fontProvider, defaultStyle);
+          }
+          return _context3.abrupt("return", {
+            pages: this.writer.context().pages,
+            linearNodeList: this.linearNodeList
+          });
+        case 14:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3, this);
+  }));
+  return function (_x11, _x12, _x13, _x14, _x15, _x16, _x17, _x18, _x19, _x20) {
+    return _ref2.apply(this, arguments);
   };
-  var context = this.writer.context();
-  var pageSize = context.getCurrentPage().pageSize;
-  var pageBackground = backgroundGetter(context.page + 1, pageSize);
-  if (pageBackground) {
-    this.writer.beginUnbreakableBlock(pageSize.width, pageSize.height);
-    pageBackground = this.docPreprocessor.preprocessDocument(pageBackground);
-    this.processNode(this.docMeasure.measureDocument(pageBackground));
-    this.writer.commitUnbreakableBlock(0, 0);
-    context.backgroundLength[context.page] += pageBackground.positions.length;
-  }
-};
+}();
+LayoutBuilder.prototype.addBackground = /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(background) {
+    var backgroundGetter, context, pageSize, pageBackground;
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          backgroundGetter = isFunction(background) ? background : function () {
+            return background;
+          };
+          context = this.writer.context();
+          pageSize = context.getCurrentPage().pageSize;
+          pageBackground = backgroundGetter(context.page + 1, pageSize);
+          if (!pageBackground) {
+            _context4.next = 14;
+            break;
+          }
+          this.writer.beginUnbreakableBlock(pageSize.width, pageSize.height);
+          pageBackground = this.docPreprocessor.preprocessDocument(pageBackground);
+          _context4.t0 = this;
+          _context4.next = 10;
+          return this.docMeasure.measureDocument(pageBackground);
+        case 10:
+          _context4.t1 = _context4.sent;
+          _context4.t0.processNode.call(_context4.t0, _context4.t1);
+          this.writer.commitUnbreakableBlock(0, 0);
+          context.backgroundLength[context.page] += pageBackground.positions.length;
+        case 14:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4, this);
+  }));
+  return function (_x21) {
+    return _ref4.apply(this, arguments);
+  };
+}();
 LayoutBuilder.prototype.addStaticRepeatable = function (headerOrFooter, sizeFunction) {
   this.addDynamicRepeatable(function () {
     return JSON.parse(JSON.stringify(headerOrFooter)); // copy to new object
   }, sizeFunction);
 };
-LayoutBuilder.prototype.addDynamicRepeatable = function (nodeGetter, sizeFunction) {
-  var pages = this.writer.context().pages;
-  for (var pageIndex = 0, l = pages.length; pageIndex < l; pageIndex++) {
-    this.writer.context().page = pageIndex;
-    var node = nodeGetter(pageIndex + 1, l, this.writer.context().pages[pageIndex].pageSize);
-    if (node) {
-      var sizes = sizeFunction(this.writer.context().getCurrentPage().pageSize, this.pageMargins);
-      this.writer.beginUnbreakableBlock(sizes.width, sizes.height);
-      node = this.docPreprocessor.preprocessDocument(node);
-      this.processNode(this.docMeasure.measureDocument(node));
-      this.writer.commitUnbreakableBlock(sizes.x, sizes.y);
-    }
-  }
-};
+LayoutBuilder.prototype.addDynamicRepeatable = /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(nodeGetter, sizeFunction) {
+    var pages, pageIndex, l, node, sizes;
+    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          pages = this.writer.context().pages;
+          pageIndex = 0, l = pages.length;
+        case 2:
+          if (!(pageIndex < l)) {
+            _context5.next = 18;
+            break;
+          }
+          this.writer.context().page = pageIndex;
+          node = nodeGetter(pageIndex + 1, l, this.writer.context().pages[pageIndex].pageSize);
+          if (!node) {
+            _context5.next = 15;
+            break;
+          }
+          sizes = sizeFunction(this.writer.context().getCurrentPage().pageSize, this.pageMargins);
+          this.writer.beginUnbreakableBlock(sizes.width, sizes.height);
+          node = this.docPreprocessor.preprocessDocument(node);
+          _context5.t0 = this;
+          _context5.next = 12;
+          return this.docMeasure.measureDocument(node);
+        case 12:
+          _context5.t1 = _context5.sent;
+          _context5.t0.processNode.call(_context5.t0, _context5.t1);
+          this.writer.commitUnbreakableBlock(sizes.x, sizes.y);
+        case 15:
+          pageIndex++;
+          _context5.next = 2;
+          break;
+        case 18:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5, this);
+  }));
+  return function (_x22, _x23) {
+    return _ref5.apply(this, arguments);
+  };
+}();
 LayoutBuilder.prototype.addHeadersAndFooters = function (header, footer) {
   var headerSizeFct = function headerSizeFct(pageSize, pageMargins) {
     return {
@@ -15374,31 +15491,34 @@ LayoutBuilder.prototype.addWatermark = function (watermark, fontProvider, defaul
     // empty watermark text
     return;
   }
-  watermark.font = watermark.font || defaultStyle.font || 'Roboto';
-  watermark.fontSize = watermark.fontSize || 'auto';
-  watermark.color = watermark.color || 'black';
-  watermark.opacity = isNumber(watermark.opacity) ? watermark.opacity : 0.6;
-  watermark.bold = watermark.bold || false;
-  watermark.italics = watermark.italics || false;
-  watermark.angle = !isUndefined(watermark.angle) && !isNull(watermark.angle) ? watermark.angle : null;
-  if (watermark.angle === null) {
-    watermark.angle = Math.atan2(this.pageSize.height, this.pageSize.width) * -180 / Math.PI;
-  }
-  if (watermark.fontSize === 'auto') {
-    watermark.fontSize = getWatermarkFontSize(this.pageSize, watermark, fontProvider);
-  }
-  var watermarkObject = {
-    text: watermark.text,
-    font: fontProvider.provideFont(watermark.font, watermark.bold, watermark.italics),
-    fontSize: watermark.fontSize,
-    color: watermark.color,
-    opacity: watermark.opacity,
-    angle: watermark.angle
-  };
-  watermarkObject._size = getWatermarkSize(watermark, fontProvider);
   var pages = this.writer.context().pages;
   for (var i = 0, l = pages.length; i < l; i++) {
-    pages[i].watermark = watermarkObject;
+    pages[i].watermark = getWatermarkObject(Object.assign({}, watermark), pages[i].pageSize, fontProvider, defaultStyle);
+  }
+  function getWatermarkObject(watermark, pageSize, fontProvider, defaultStyle) {
+    watermark.font = watermark.font || defaultStyle.font || 'Roboto';
+    watermark.fontSize = watermark.fontSize || 'auto';
+    watermark.color = watermark.color || 'black';
+    watermark.opacity = isNumber(watermark.opacity) ? watermark.opacity : 0.6;
+    watermark.bold = watermark.bold || false;
+    watermark.italics = watermark.italics || false;
+    watermark.angle = !isUndefined(watermark.angle) && !isNull(watermark.angle) ? watermark.angle : null;
+    if (watermark.angle === null) {
+      watermark.angle = Math.atan2(pageSize.height, pageSize.width) * -180 / Math.PI;
+    }
+    if (watermark.fontSize === 'auto') {
+      watermark.fontSize = getWatermarkFontSize(pageSize, watermark, fontProvider);
+    }
+    var watermarkObject = {
+      text: watermark.text,
+      font: fontProvider.provideFont(watermark.font, watermark.bold, watermark.italics),
+      fontSize: watermark.fontSize,
+      color: watermark.color,
+      opacity: watermark.opacity,
+      angle: watermark.angle
+    };
+    watermarkObject._size = getWatermarkSize(watermark, fontProvider);
+    return watermarkObject;
   }
   function getWatermarkSize(watermark, fontProvider) {
     var textTools = new TextTools(fontProvider);
@@ -15830,20 +15950,20 @@ LayoutBuilder.prototype._getRowSpanEndingCell = function (tableBody, rowIndex, c
   }
   return null;
 };
-LayoutBuilder.prototype.processRow = function (_ref) {
-  var _ref$marginX = _ref.marginX,
-    marginX = _ref$marginX === void 0 ? [0, 0] : _ref$marginX,
-    _ref$dontBreakRows = _ref.dontBreakRows,
-    dontBreakRows = _ref$dontBreakRows === void 0 ? false : _ref$dontBreakRows,
-    _ref$rowsWithoutPageB = _ref.rowsWithoutPageBreak,
-    rowsWithoutPageBreak = _ref$rowsWithoutPageB === void 0 ? 0 : _ref$rowsWithoutPageB,
-    cells = _ref.cells,
-    widths = _ref.widths,
-    gaps = _ref.gaps,
-    tableNode = _ref.tableNode,
-    tableBody = _ref.tableBody,
-    rowIndex = _ref.rowIndex,
-    height = _ref.height;
+LayoutBuilder.prototype.processRow = function (_ref6) {
+  var _ref6$marginX = _ref6.marginX,
+    marginX = _ref6$marginX === void 0 ? [0, 0] : _ref6$marginX,
+    _ref6$dontBreakRows = _ref6.dontBreakRows,
+    dontBreakRows = _ref6$dontBreakRows === void 0 ? false : _ref6$dontBreakRows,
+    _ref6$rowsWithoutPage = _ref6.rowsWithoutPageBreak,
+    rowsWithoutPageBreak = _ref6$rowsWithoutPage === void 0 ? 0 : _ref6$rowsWithoutPage,
+    cells = _ref6.cells,
+    widths = _ref6.widths,
+    gaps = _ref6.gaps,
+    tableNode = _ref6.tableNode,
+    tableBody = _ref6.tableBody,
+    rowIndex = _ref6.rowIndex,
+    height = _ref6.height;
   var self = this;
   var isUnbreakableRow = dontBreakRows || rowIndex <= rowsWithoutPageBreak - 1;
   var pageBreaks = [];
@@ -31883,6 +32003,7 @@ module.exports = function GetIntrinsic(name, allowMissing) {
 
 var GetIntrinsic = __webpack_require__(28651);
 
+/** @type {import('.')} */
 var $gOPD = GetIntrinsic('%Object.getOwnPropertyDescriptor%', true);
 
 if ($gOPD) {
@@ -31940,13 +32061,13 @@ var test = {
 	foo: {}
 };
 
-var $Object = Object;
+// @ts-expect-error: TS errors on an inherited property for some reason
+var result = { __proto__: test }.foo === test.foo
+	&& !(test instanceof Object);
 
 /** @type {import('.')} */
 module.exports = function hasProto() {
-	// @ts-expect-error: TS errors on an inherited property for some reason
-	return { __proto__: test }.foo === test.foo
-		&& !(test instanceof $Object);
+	return result;
 };
 
 
@@ -35456,20 +35577,23 @@ module.exports = function shimNumberIsNaN() {
 
 var callBound = __webpack_require__(67913);
 var hasToStringTag = __webpack_require__(26626)();
-var has;
-var $exec;
-var isRegexMarker;
-var badStringifier;
+var hasOwn = __webpack_require__(55215);
+var gOPD = __webpack_require__(68109);
+
+/** @type {import('.')} */
+var fn;
 
 if (hasToStringTag) {
-	has = callBound('Object.prototype.hasOwnProperty');
-	$exec = callBound('RegExp.prototype.exec');
-	isRegexMarker = {};
+	/** @type {(receiver: ThisParameterType<typeof RegExp.prototype.exec>, ...args: Parameters<typeof RegExp.prototype.exec>) => ReturnType<typeof RegExp.prototype.exec>} */
+	var $exec = callBound('RegExp.prototype.exec');
+	/** @type {object} */
+	var isRegexMarker = {};
 
 	var throwRegexMarker = function () {
 		throw isRegexMarker;
 	};
-	badStringifier = {
+	/** @type {{ toString(): never, valueOf(): never, [Symbol.toPrimitive]?(): never }} */
+	var badStringifier = {
 		toString: throwRegexMarker,
 		valueOf: throwRegexMarker
 	};
@@ -35477,32 +35601,37 @@ if (hasToStringTag) {
 	if (typeof Symbol.toPrimitive === 'symbol') {
 		badStringifier[Symbol.toPrimitive] = throwRegexMarker;
 	}
-}
 
-var $toString = callBound('Object.prototype.toString');
-var gOPD = Object.getOwnPropertyDescriptor;
-var regexClass = '[object RegExp]';
-
-module.exports = hasToStringTag
+	/** @type {import('.')} */
+	// @ts-expect-error TS can't figure out that the $exec call always throws
 	// eslint-disable-next-line consistent-return
-	? function isRegex(value) {
+	fn = function isRegex(value) {
 		if (!value || typeof value !== 'object') {
 			return false;
 		}
 
-		var descriptor = gOPD(value, 'lastIndex');
-		var hasLastIndexDataProperty = descriptor && has(descriptor, 'value');
+		// eslint-disable-next-line no-extra-parens
+		var descriptor = /** @type {NonNullable<typeof gOPD>} */ (gOPD)(/** @type {{ lastIndex?: unknown }} */ (value), 'lastIndex');
+		var hasLastIndexDataProperty = descriptor && hasOwn(descriptor, 'value');
 		if (!hasLastIndexDataProperty) {
 			return false;
 		}
 
 		try {
-			$exec(value, badStringifier);
+			// eslint-disable-next-line no-extra-parens
+			$exec(value, /** @type {string} */ (/** @type {unknown} */ (badStringifier)));
 		} catch (e) {
 			return e === isRegexMarker;
 		}
-	}
-	: function isRegex(value) {
+	};
+} else {
+	/** @type {(receiver: ThisParameterType<typeof Object.prototype.toString>, ...args: Parameters<typeof Object.prototype.toString>) => ReturnType<typeof Object.prototype.toString>} */
+	var $toString = callBound('Object.prototype.toString');
+	/** @const @type {'[object RegExp]'} */
+	var regexClass = '[object RegExp]';
+
+	/** @type {import('.')} */
+	fn = function isRegex(value) {
 		// In older browsers, typeof regex incorrectly returns 'function'
 		if (!value || (typeof value !== 'object' && typeof value !== 'function')) {
 			return false;
@@ -35510,6 +35639,9 @@ module.exports = hasToStringTag
 
 		return $toString(value) === regexClass;
 	};
+}
+
+module.exports = fn;
 
 
 /***/ }),
@@ -49520,7 +49652,7 @@ var isFunction = (__webpack_require__(91867).isFunction);
 var isUndefined = (__webpack_require__(91867).isUndefined);
 //var isNull = require('../helpers').isNull;
 var pack = (__webpack_require__(91867).pack);
-var FileSaver = __webpack_require__(76036);
+var FileSaver = __webpack_require__(49067);
 var saveAs = FileSaver.saveAs;
 
 var defaultClientFonts = {
@@ -50142,34 +50274,34 @@ function DocMeasure(fontProvider, styleDictionary, defaultStyle, imageMeasure, s
  * @param  {Object} docStructure document-definition-object
  * @return {Object}              document-measurement-object
  */
-DocMeasure.prototype.measureDocument = function (docStructure) {
-	return this.measureNode(docStructure);
+DocMeasure.prototype.measureDocument = async function (docStructure) {
+	return await this.measureNode(docStructure);
 };
 
-DocMeasure.prototype.measureNode = function (node) {
+DocMeasure.prototype.measureNode = async function (node) {
 
 	var self = this;
 
-	return this.styleStack.auto(node, function () {
+	return await this.styleStack.auto(node, async function () {
 		// TODO: refactor + rethink whether this is the proper way to handle margins
 		node._margin = getNodeMargin(node);
 
 		if (node.columns) {
-			return extendMargins(self.measureColumns(node));
+			return extendMargins(await self.measureColumns(node));
 		} else if (node.stack) {
-			return extendMargins(self.measureVerticalContainer(node));
+			return extendMargins(await self.measureVerticalContainer(node));
 		} else if (node.ul) {
-			return extendMargins(self.measureUnorderedList(node));
+			return extendMargins(await self.measureUnorderedList(node));
 		} else if (node.ol) {
-			return extendMargins(self.measureOrderedList(node));
+			return extendMargins(await self.measureOrderedList(node));
 		} else if (node.table) {
 			return extendMargins(self.measureTable(node));
 		} else if (node.text !== undefined) {
 			return extendMargins(self.measureLeaf(node));
 		} else if (node.toc) {
-			return extendMargins(self.measureToc(node));
+			return extendMargins(await self.measureToc(node));
 		} else if (node.image) {
-			return extendMargins(self.measureImage(node));
+			return extendMargins(await self.measureImage(node));
 		} else if (node.svg) {
 			return extendMargins(self.measureSVG(node));
 		} else if (node.canvas) {
@@ -50353,9 +50485,9 @@ DocMeasure.prototype.measureLeaf = function (node) {
 	return node;
 };
 
-DocMeasure.prototype.measureToc = function (node) {
+DocMeasure.prototype.measureToc = async function (node) {
 	if (node.toc.title) {
-		node.toc.title = this.measureNode(node.toc.title);
+		node.toc.title = await this.measureNode(node.toc.title);
 	}
 
 	if (node.toc._items.length > 0) {
@@ -50385,20 +50517,20 @@ DocMeasure.prototype.measureToc = function (node) {
 			layout: 'noBorders'
 		};
 
-		node.toc._table = this.measureNode(node.toc._table);
+		node.toc._table = await this.measureNode(node.toc._table);
 	}
 
 	return node;
 };
 
-DocMeasure.prototype.measureVerticalContainer = function (node) {
+DocMeasure.prototype.measureVerticalContainer = async function (node) {
 	var items = node.stack;
 
 	node._minWidth = 0;
 	node._maxWidth = 0;
 
 	for (var i = 0, l = items.length; i < l; i++) {
-		items[i] = this.measureNode(items[i]);
+		items[i] = await this.measureNode(items[i]);
 
 		node._minWidth = Math.max(node._minWidth, items[i]._minWidth);
 		node._maxWidth = Math.max(node._maxWidth, items[i]._maxWidth);
@@ -50573,16 +50705,16 @@ DocMeasure.prototype.buildOrderedMarker = function (counter, styleStack, type, s
 	return { _inlines: this.textTools.buildInlines(textArray, styleStack).items };
 };
 
-DocMeasure.prototype.measureUnorderedList = function (node) {
+DocMeasure.prototype.measureUnorderedList = async function (node) {
 	var style = this.styleStack.clone();
 	var items = node.ul;
 	node.type = node.type || 'disc';
-	node._gapSize = this.gapSizeForList();
+	node._gapSize = await this.gapSizeForList();
 	node._minWidth = 0;
 	node._maxWidth = 0;
 
 	for (var i = 0, l = items.length; i < l; i++) {
-		var item = items[i] = this.measureNode(items[i]);
+		var item = items[i] = await this.measureNode(items[i]);
 
 		if (!item.ol && !item.ul) {
 			item.listMarker = this.buildUnorderedMarker(style, node._gapSize, item.listType || node.type);
@@ -50595,7 +50727,7 @@ DocMeasure.prototype.measureUnorderedList = function (node) {
 	return node;
 };
 
-DocMeasure.prototype.measureOrderedList = function (node) {
+DocMeasure.prototype.measureOrderedList = async function (node) {
 	var style = this.styleStack.clone();
 	var items = node.ol;
 	node.type = node.type || 'decimal';
@@ -50604,13 +50736,13 @@ DocMeasure.prototype.measureOrderedList = function (node) {
 	if (!isNumber(node.start)) {
 		node.start = node.reversed ? items.length : 1;
 	}
-	node._gapSize = this.gapSizeForList();
+	node._gapSize = await this.gapSizeForList();
 	node._minWidth = 0;
 	node._maxWidth = 0;
 
 	var counter = node.start;
 	for (var i = 0, l = items.length; i < l; i++) {
-		var item = items[i] = this.measureNode(items[i]);
+		var item = items[i] = await this.measureNode(items[i]);
 
 		if (!item.ol && !item.ul) {
 			var counterValue = isNumber(item.counter) ? item.counter : counter;
@@ -50643,12 +50775,12 @@ DocMeasure.prototype.measureOrderedList = function (node) {
 	return node;
 };
 
-DocMeasure.prototype.measureColumns = function (node) {
+DocMeasure.prototype.measureColumns = async function (node) {
 	var columns = node.columns;
 	node._gap = this.styleStack.getProperty('columnGap') || 0;
 
 	for (var i = 0, l = columns.length; i < l; i++) {
-		columns[i] = this.measureNode(columns[i]);
+		columns[i] = await this.measureNode(columns[i]);
 	}
 
 	var measures = ColumnCalculator.measureMinMax(columns);
@@ -52113,13 +52245,13 @@ function ImageMeasure(pdfKitDoc, imageDictionary) {
 	this.imageDictionary = imageDictionary || {};
 }
 
-ImageMeasure.prototype.measureImage = function (src) {
+ImageMeasure.prototype.measureImage = async function (src) {
 	var image;
 	var that = this;
 
 	if (!this.pdfKitDoc._imageRegistry[src]) {
 		try {
-			image = this.pdfKitDoc.openImage(realImageSrc(src));
+			image = this.pdfKitDoc.openImage(await realImageSrc(src));
 			if (!image) {
 				throw 'No image';
 			}
@@ -52132,9 +52264,23 @@ ImageMeasure.prototype.measureImage = function (src) {
 		image = this.pdfKitDoc._imageRegistry[src];
 	}
 
-	return { width: image.width, height: image.height };
+	var imageSize = { width: image.width, height: image.height };
 
-	function realImageSrc(src) {
+	if (typeof image === 'object' && image.constructor.name === 'JPEG') {
+		// If EXIF orientation calls for it, swap width and height
+		if (image.orientation > 4) {
+			imageSize = { width: image.height, height: image.width };
+		}
+	}
+
+	return imageSize;
+
+	async function realImageSrc(src) {
+
+		if (typeof src === 'object' && src.read) {
+			return src.read();
+		}
+
 		var img = that.imageDictionary[src];
 
 		if (!img) {
@@ -52454,7 +52600,7 @@ function _interopDefault(ex) {
 	return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex;
 }
 
-var PdfKit = _interopDefault(__webpack_require__(47008));
+var PdfKit = _interopDefault(__webpack_require__(31325));
 
 function getEngineInstance() {
 	return PdfKit;
@@ -54171,9 +54317,9 @@ StyleContextStack.prototype.autopush = function (item) {
  * @param  {Function} function to be called between autopush and pop
  * @return {Object} value returned by callback
  */
-StyleContextStack.prototype.auto = function (item, callback) {
+StyleContextStack.prototype.auto = async function (item, callback) {
 	var pushedItems = this.autopush(item);
-	var result = callback();
+	var result = await callback();
 
 	if (pushedItems > 0) {
 		this.pop(pushedItems);
@@ -55507,7 +55653,7 @@ module.exports = TraversalTracker;
 
 /***/ }),
 
-/***/ 76036:
+/***/ 49067:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(a,b){if(true)!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (b),
@@ -68181,7 +68327,7 @@ module.exports = LineBreaker;
 
 /***/ }),
 
-/***/ 47008:
+/***/ 31325:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";

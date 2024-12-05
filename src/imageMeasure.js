@@ -7,13 +7,13 @@ function ImageMeasure(pdfKitDoc, imageDictionary) {
 	this.imageDictionary = imageDictionary || {};
 }
 
-ImageMeasure.prototype.measureImage = function (src) {
+ImageMeasure.prototype.measureImage = async function (src) {
 	var image;
 	var that = this;
 
 	if (!this.pdfKitDoc._imageRegistry[src]) {
 		try {
-			image = this.pdfKitDoc.openImage(realImageSrc(src));
+			image = this.pdfKitDoc.openImage(await realImageSrc(src));
 			if (!image) {
 				throw 'No image';
 			}
@@ -37,7 +37,12 @@ ImageMeasure.prototype.measureImage = function (src) {
 
 	return imageSize;
 
-	function realImageSrc(src) {
+	async function realImageSrc(src) {
+
+		if (typeof src === 'object' && src.read) {
+			return src.read();
+		}
+
 		var img = that.imageDictionary[src];
 
 		if (!img) {

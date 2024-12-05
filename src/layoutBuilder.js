@@ -58,7 +58,7 @@ LayoutBuilder.prototype.registerTableLayouts = function (tableLayouts) {
  * @param {Object} defaultStyle default style definition
  * @return {Array} an array of pages
  */
-LayoutBuilder.prototype.layoutDocument = function (docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark, pageBreakBeforeFct) {
+LayoutBuilder.prototype.layoutDocument = async function (docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark, pageBreakBeforeFct) {
 
 	function addPageBreaksIfNecessary(linearNodeList, pages) {
 
@@ -134,30 +134,30 @@ LayoutBuilder.prototype.layoutDocument = function (docStructure, fontProvider, s
 		});
 	}
 
-	var result = this.tryLayoutDocument(docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark);
+	var result = await this.tryLayoutDocument(docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark);
 	while (addPageBreaksIfNecessary(result.linearNodeList, result.pages)) {
 		resetXYs(result);
-		result = this.tryLayoutDocument(docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark);
+		result = await this.tryLayoutDocument(docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark);
 	}
 
 	return result.pages;
 };
 
-LayoutBuilder.prototype.tryLayoutDocument = function (docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark, pageBreakBeforeFct) {
+LayoutBuilder.prototype.tryLayoutDocument = async function (docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark, pageBreakBeforeFct) {
 
 	this.linearNodeList = [];
 	docStructure = this.docPreprocessor.preprocessDocument(docStructure);
-	docStructure = this.docMeasure.measureDocument(docStructure);
+	docStructure = await this.docMeasure.measureDocument(docStructure);
 
 	this.writer = new PageElementWriter(
 		new DocumentContext(this.pageSize, this.pageMargins), this.tracker);
 
 	var _this = this;
-	this.writer.context().tracker.startTracking('pageAdded', function () {
-		_this.addBackground(background);
+	this.writer.context().tracker.startTracking('pageAdded', async function () {
+		await _this.addBackground(background);
 	});
 
-	this.addBackground(background);
+	await this.addBackground(background);
 	this.processNode(docStructure);
 	this.addHeadersAndFooters(header, footer);
 	if (watermark != null) {
@@ -168,7 +168,7 @@ LayoutBuilder.prototype.tryLayoutDocument = function (docStructure, fontProvider
 };
 
 
-LayoutBuilder.prototype.addBackground = function (background) {
+LayoutBuilder.prototype.addBackground = async function (background) {
 	var backgroundGetter = isFunction(background) ? background : function () {
 		return background;
 	};
@@ -181,7 +181,7 @@ LayoutBuilder.prototype.addBackground = function (background) {
 	if (pageBackground) {
 		this.writer.beginUnbreakableBlock(pageSize.width, pageSize.height);
 		pageBackground = this.docPreprocessor.preprocessDocument(pageBackground);
-		this.processNode(this.docMeasure.measureDocument(pageBackground));
+		this.processNode(await this.docMeasure.measureDocument(pageBackground));
 		this.writer.commitUnbreakableBlock(0, 0);
 		context.backgroundLength[context.page] += pageBackground.positions.length;
 	}
@@ -193,7 +193,7 @@ LayoutBuilder.prototype.addStaticRepeatable = function (headerOrFooter, sizeFunc
 	}, sizeFunction);
 };
 
-LayoutBuilder.prototype.addDynamicRepeatable = function (nodeGetter, sizeFunction) {
+LayoutBuilder.prototype.addDynamicRepeatable = async function (nodeGetter, sizeFunction) {
 	var pages = this.writer.context().pages;
 
 	for (var pageIndex = 0, l = pages.length; pageIndex < l; pageIndex++) {
@@ -205,7 +205,7 @@ LayoutBuilder.prototype.addDynamicRepeatable = function (nodeGetter, sizeFunctio
 			var sizes = sizeFunction(this.writer.context().getCurrentPage().pageSize, this.pageMargins);
 			this.writer.beginUnbreakableBlock(sizes.width, sizes.height);
 			node = this.docPreprocessor.preprocessDocument(node);
-			this.processNode(this.docMeasure.measureDocument(node));
+			this.processNode(await this.docMeasure.measureDocument(node));
 			this.writer.commitUnbreakableBlock(sizes.x, sizes.y);
 		}
 	}

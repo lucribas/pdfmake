@@ -33,34 +33,34 @@ function DocMeasure(fontProvider, styleDictionary, defaultStyle, imageMeasure, s
  * @param  {Object} docStructure document-definition-object
  * @return {Object}              document-measurement-object
  */
-DocMeasure.prototype.measureDocument = function (docStructure) {
-	return this.measureNode(docStructure);
+DocMeasure.prototype.measureDocument = async function (docStructure) {
+	return await this.measureNode(docStructure);
 };
 
-DocMeasure.prototype.measureNode = function (node) {
+DocMeasure.prototype.measureNode = async function (node) {
 
 	var self = this;
 
-	return this.styleStack.auto(node, function () {
+	return await this.styleStack.auto(node, async function () {
 		// TODO: refactor + rethink whether this is the proper way to handle margins
 		node._margin = getNodeMargin(node);
 
 		if (node.columns) {
-			return extendMargins(self.measureColumns(node));
+			return extendMargins(await self.measureColumns(node));
 		} else if (node.stack) {
-			return extendMargins(self.measureVerticalContainer(node));
+			return extendMargins(await self.measureVerticalContainer(node));
 		} else if (node.ul) {
-			return extendMargins(self.measureUnorderedList(node));
+			return extendMargins(await self.measureUnorderedList(node));
 		} else if (node.ol) {
-			return extendMargins(self.measureOrderedList(node));
+			return extendMargins(await self.measureOrderedList(node));
 		} else if (node.table) {
 			return extendMargins(self.measureTable(node));
 		} else if (node.text !== undefined) {
 			return extendMargins(self.measureLeaf(node));
 		} else if (node.toc) {
-			return extendMargins(self.measureToc(node));
+			return extendMargins(await self.measureToc(node));
 		} else if (node.image) {
-			return extendMargins(self.measureImage(node));
+			return extendMargins(await self.measureImage(node));
 		} else if (node.svg) {
 			return extendMargins(self.measureSVG(node));
 		} else if (node.canvas) {
@@ -244,9 +244,9 @@ DocMeasure.prototype.measureLeaf = function (node) {
 	return node;
 };
 
-DocMeasure.prototype.measureToc = function (node) {
+DocMeasure.prototype.measureToc = async function (node) {
 	if (node.toc.title) {
-		node.toc.title = this.measureNode(node.toc.title);
+		node.toc.title = await this.measureNode(node.toc.title);
 	}
 
 	if (node.toc._items.length > 0) {
@@ -276,20 +276,20 @@ DocMeasure.prototype.measureToc = function (node) {
 			layout: 'noBorders'
 		};
 
-		node.toc._table = this.measureNode(node.toc._table);
+		node.toc._table = await this.measureNode(node.toc._table);
 	}
 
 	return node;
 };
 
-DocMeasure.prototype.measureVerticalContainer = function (node) {
+DocMeasure.prototype.measureVerticalContainer = async function (node) {
 	var items = node.stack;
 
 	node._minWidth = 0;
 	node._maxWidth = 0;
 
 	for (var i = 0, l = items.length; i < l; i++) {
-		items[i] = this.measureNode(items[i]);
+		items[i] = await this.measureNode(items[i]);
 
 		node._minWidth = Math.max(node._minWidth, items[i]._minWidth);
 		node._maxWidth = Math.max(node._maxWidth, items[i]._maxWidth);
@@ -464,16 +464,16 @@ DocMeasure.prototype.buildOrderedMarker = function (counter, styleStack, type, s
 	return { _inlines: this.textTools.buildInlines(textArray, styleStack).items };
 };
 
-DocMeasure.prototype.measureUnorderedList = function (node) {
+DocMeasure.prototype.measureUnorderedList = async function (node) {
 	var style = this.styleStack.clone();
 	var items = node.ul;
 	node.type = node.type || 'disc';
-	node._gapSize = this.gapSizeForList();
+	node._gapSize = await this.gapSizeForList();
 	node._minWidth = 0;
 	node._maxWidth = 0;
 
 	for (var i = 0, l = items.length; i < l; i++) {
-		var item = items[i] = this.measureNode(items[i]);
+		var item = items[i] = await this.measureNode(items[i]);
 
 		if (!item.ol && !item.ul) {
 			item.listMarker = this.buildUnorderedMarker(style, node._gapSize, item.listType || node.type);
@@ -486,7 +486,7 @@ DocMeasure.prototype.measureUnorderedList = function (node) {
 	return node;
 };
 
-DocMeasure.prototype.measureOrderedList = function (node) {
+DocMeasure.prototype.measureOrderedList = async function (node) {
 	var style = this.styleStack.clone();
 	var items = node.ol;
 	node.type = node.type || 'decimal';
@@ -495,13 +495,13 @@ DocMeasure.prototype.measureOrderedList = function (node) {
 	if (!isNumber(node.start)) {
 		node.start = node.reversed ? items.length : 1;
 	}
-	node._gapSize = this.gapSizeForList();
+	node._gapSize = await this.gapSizeForList();
 	node._minWidth = 0;
 	node._maxWidth = 0;
 
 	var counter = node.start;
 	for (var i = 0, l = items.length; i < l; i++) {
-		var item = items[i] = this.measureNode(items[i]);
+		var item = items[i] = await this.measureNode(items[i]);
 
 		if (!item.ol && !item.ul) {
 			var counterValue = isNumber(item.counter) ? item.counter : counter;
@@ -534,12 +534,12 @@ DocMeasure.prototype.measureOrderedList = function (node) {
 	return node;
 };
 
-DocMeasure.prototype.measureColumns = function (node) {
+DocMeasure.prototype.measureColumns = async function (node) {
 	var columns = node.columns;
 	node._gap = this.styleStack.getProperty('columnGap') || 0;
 
 	for (var i = 0, l = columns.length; i < l; i++) {
-		columns[i] = this.measureNode(columns[i]);
+		columns[i] = await this.measureNode(columns[i]);
 	}
 
 	var measures = ColumnCalculator.measureMinMax(columns);

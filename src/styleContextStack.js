@@ -97,9 +97,9 @@ StyleContextStack.prototype.autopush = function (item) {
  * @param  {Function} function to be called between autopush and pop
  * @return {Object} value returned by callback
  */
-StyleContextStack.prototype.auto = function (item, callback) {
+StyleContextStack.prototype.auto = async function (item, callback) {
 	var pushedItems = this.autopush(item);
-	var result = callback();
+	var result = await callback();
 
 	if (pushedItems > 0) {
 		this.pop(pushedItems);
