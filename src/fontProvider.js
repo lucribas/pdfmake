@@ -39,8 +39,11 @@ FontProvider.prototype.getFontType = function (bold, italics) {
 
 FontProvider.prototype.getFontFile = function (familyName, bold, italics) {
 	var type = this.getFontType(bold, italics);
+	// console.log(familyName);
+	// familyName = 'Roboto';
 	if (!this.fonts[familyName] || !this.fonts[familyName][type]) {
-		return null;
+		// return null;
+		return this.fonts['Roboto'][type];
 	}
 
 	return this.fonts[familyName][type];

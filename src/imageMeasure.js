@@ -7,13 +7,14 @@ function ImageMeasure(pdfKitDoc, imageDictionary) {
 	this.imageDictionary = imageDictionary || {};
 }
 
-ImageMeasure.prototype.measureImage = function (src) {
+ImageMeasure.prototype.measureImage = async function (src) {
 	var image;
 	var that = this;
 
 	if (!this.pdfKitDoc._imageRegistry[src]) {
 		try {
-			image = this.pdfKitDoc.openImage(realImageSrc(src));
+			const imageSrc = await realImageSrc(src);
+			image = await this.pdfKitDoc.openImage(imageSrc);
 			if (!image) {
 				throw 'No image';
 			}
@@ -27,8 +28,19 @@ ImageMeasure.prototype.measureImage = function (src) {
 	}
 
 	return { width: image.width, height: image.height };
+	// console.log("image size ="+JSON.stringify(imageSize));
 
-	function realImageSrc(src) {
+	async function realImageSrc(src) {
+
+		if (typeof src === 'object' && src.read) {
+			// console.log("Encontrou src as obj..");
+			// return src.read();
+			return src;
+		} else {
+			console.log("ERROOOO "+JSON.stringify(src));
+
+		}
+
 		var img = that.imageDictionary[src];
 
 		if (!img) {

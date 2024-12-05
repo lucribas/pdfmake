@@ -48,6 +48,7 @@ DocPreprocessor.prototype.preprocessNode = function (node) {
 		return this.preprocessText(node);
 	} else if (node.toc) {
 		return this.preprocessToc(node);
+	// } else if (node.image || node.image == "") {
 	} else if (node.image) {
 		return this.preprocessImage(node);
 	} else if (node.svg) {

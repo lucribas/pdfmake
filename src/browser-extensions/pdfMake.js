@@ -40,7 +40,7 @@ function canCreatePdf() {
 	}
 }
 
-Document.prototype._createDoc = function (options, cb) {
+Document.prototype._createDoc = async function (options, cb) {
 	var getExtendedUrl = function (url) {
 		if (typeof url === 'object') {
 			return { url: url.url, headers: url.headers };
@@ -60,7 +60,7 @@ Document.prototype._createDoc = function (options, cb) {
 	require('fs').bindFS(this.vfs); // bind virtual file system to file system
 
 	if (!isFunction(cb)) {
-		var doc = printer.createPdfKitDocument(this.docDefinition, options);
+		var doc = await printer.createPdfKitDocument(this.docDefinition, options);
 
 		return doc;
 	}
@@ -129,8 +129,8 @@ Document.prototype._createDoc = function (options, cb) {
 
 	var _this = this;
 
-	urlResolver.resolved().then(function () {
-		var doc = printer.createPdfKitDocument(_this.docDefinition, options);
+	urlResolver.resolved().then(await async function () {
+		var doc = await printer.createPdfKitDocument(_this.docDefinition, options);
 
 		cb(doc);
 	}, function (result) {
@@ -155,13 +155,13 @@ Document.prototype._flushDoc = function (doc, callback) {
 	doc.end();
 };
 
-Document.prototype._getPages = function (options, cb) {
+Document.prototype._getPages = async function (options, cb) {
 	if (!cb) {
 		throw '_getPages is an async method and needs a callback argument';
 	}
 	var _this = this;
 
-	this._createDoc(options, function (doc) {
+	await this._createDoc(options, function (doc) {
 		_this._flushDoc(doc, function (ignoreBuffer, pages) {
 			cb(pages);
 		});
@@ -294,27 +294,27 @@ Document.prototype.getBlob = function (cb, options) {
 	}, options);
 };
 
-Document.prototype.getBuffer = function (cb, options) {
+Document.prototype.getBuffer = async function (cb, options) {
 	if (!cb) {
 		throw 'getBuffer is an async method and needs a callback argument';
 	}
 
 	var _this = this;
 
-	this._createDoc(options, function (doc) {
+	await this._createDoc(options, function (doc) {
 		_this._flushDoc(doc, function (buffer) {
 			cb(buffer);
 		});
 	});
 };
 
-Document.prototype.getStream = function (options, cb) {
+Document.prototype.getStream = async function (options, cb) {
 	if (!isFunction(cb)) {
-		var doc = this._createDoc(options);
+		var doc = await this._createDoc(options);
 		return doc;
 	}
 
-	this._createDoc(options, function (doc) {
+	await this._createDoc(options, function (doc) {
 		cb(doc);
 	});
 };

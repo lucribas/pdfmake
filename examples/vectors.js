@@ -142,6 +142,6 @@ var docDefinition = {
 	}
 };
 
-var pdfDoc = printer.createPdfKitDocument(docDefinition);
+var pdfDoc = await printer.createPdfKitDocument(docDefinition);
 pdfDoc.pipe(fs.createWriteStream('pdfs/vectors.pdf'));
 pdfDoc.end();

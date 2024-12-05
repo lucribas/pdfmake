@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@foliojs-fork/linebreak": "^1.1.2",
-    "@foliojs-fork/pdfkit": "^0.15.1",
+    "@foliojs-fork/pdfkit": "github:lucribas/pdfkit#feature/image-stream-support",
     "iconv-lite": "^0.6.3",
     "xmldoc": "^1.3.0"
   },
@@ -51,7 +51,7 @@
   },
   "scripts": {
     "test": "run-s build mocha",
-    "build": "run-s build:3rdparty build:browser",
+    "build": "run-s build:3rdparty",
     "build:3rdparty": "shx cp node_modules/svg-to-pdfkit/source.js src/3rd-party/svg-to-pdfkit/source.js && shx cp node_modules/svg-to-pdfkit/LICENSE src/3rd-party/svg-to-pdfkit/LICENSE",
     "build:browser": "webpack",
     "build:browser-standard-fonts": "webpack --config webpack-standardfonts.config.js",

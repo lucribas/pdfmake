@@ -101,14 +101,14 @@ function PdfPrinter(fontDescriptors) {
  *	}
  * };
  *
- * var pdfKitDoc = printer.createPdfKitDocument(docDefinition);
+ * var pdfKitDoc = await printer.createPdfKitDocument(docDefinition);
  *
  * pdfKitDoc.pipe(fs.createWriteStream('sample.pdf'));
  * pdfKitDoc.end();
  *
  * @return {Object} a pdfKit document object which can be saved or encode to data-url
  */
-PdfPrinter.prototype.createPdfKitDocument = function (docDefinition, options) {
+PdfPrinter.prototype.createPdfKitDocument = async function (docDefinition, options) {
 	options = options || {};
 
 	docDefinition.version = docDefinition.version || '1.3';
@@ -150,7 +150,7 @@ PdfPrinter.prototype.createPdfKitDocument = function (docDefinition, options) {
 		builder.registerTableLayouts(options.tableLayouts);
 	}
 
-	var pages = builder.layoutDocument(docDefinition.content, this.fontProvider, docDefinition.styles || {}, docDefinition.defaultStyle || {
+	var pages = await builder.layoutDocument(docDefinition.content, this.fontProvider, docDefinition.styles || {}, docDefinition.defaultStyle || {
 		fontSize: 12,
 		font: 'Roboto'
 	}, docDefinition.background, docDefinition.header, docDefinition.footer, docDefinition.images, docDefinition.watermark, docDefinition.pageBreakBefore);
@@ -168,7 +168,7 @@ PdfPrinter.prototype.createPdfKitDocument = function (docDefinition, options) {
 
 	var patterns = createPatterns(docDefinition.patterns || {}, this.pdfKitDoc);
 
-	renderPages(pages, this.fontProvider, this.pdfKitDoc, patterns, options.progressCallback);
+	await renderPages(pages, this.fontProvider, this.pdfKitDoc, patterns, options.progressCallback);
 
 	if (options.autoPrint) {
 		var printActionRef = this.pdfKitDoc.ref({
@@ -373,7 +373,7 @@ function updatePageOrientationInOptions(currentPage, pdfKitDoc) {
 	}
 }
 
-function renderPages(pages, fontProvider, pdfKitDoc, patterns, progressCallback) {
+async function renderPages(pages, fontProvider, pdfKitDoc, patterns, progressCallback) {
 	pdfKitDoc._pdfMakePages = pages;
 	pdfKitDoc.addPage();
 
@@ -405,7 +405,8 @@ function renderPages(pages, fontProvider, pdfKitDoc, patterns, progressCallback)
 					renderLine(item.item, item.item.x, item.item.y, patterns, pdfKitDoc);
 					break;
 				case 'image':
-					renderImage(item.item, item.item.x, item.item.y, pdfKitDoc);
+					await renderImage(item.item, item.item.x, item.item.y, pdfKitDoc);
+					item.item = null;
 					break;
 				case 'svg':
 					renderSVG(item.item, item.item.x, item.item.y, pdfKitDoc, fontProvider);
@@ -649,7 +650,7 @@ function renderVector(vector, patterns, pdfKitDoc) {
 	}
 }
 
-function renderImage(image, x, y, pdfKitDoc) {
+async function renderImage(image, x, y, pdfKitDoc) {
 	var opacity = isNumber(image.opacity) ? image.opacity : 1;
 	pdfKitDoc.opacity(opacity);
 	if (image.cover) {
@@ -659,10 +660,11 @@ function renderImage(image, x, y, pdfKitDoc) {
 		var height = image.cover.height ? image.cover.height : image.height;
 		pdfKitDoc.save();
 		pdfKitDoc.rect(image.x, image.y, width, height).clip();
-		pdfKitDoc.image(image.image, image.x, image.y, { cover: [width, height], align: align, valign: valign });
+		await pdfKitDoc.image(image.image, image.x, image.y, { cover: [width, height], align: align, valign: valign });
 		pdfKitDoc.restore();
 	} else {
-		pdfKitDoc.image(image.image, image.x, image.y, { width: image._width, height: image._height });
+		await pdfKitDoc.image(image.image, image.x, image.y, { width: image._width, height: image._height });
+		// console.log("w="+image._width+" h="+image._height);
 	}
 	if (image.link) {
 		pdfKitDoc.link(image.x, image.y, image._width, image._height, image.link);

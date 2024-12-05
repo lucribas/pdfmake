@@ -25,7 +25,7 @@ function createPdfBinary(pdfDoc, callback) {
 
 	var printer = new pdfMakePrinter(fontDescriptors);
 
-	var doc = printer.createPdfKitDocument(pdfDoc);
+	var doc = await printer.createPdfKitDocument(pdfDoc);
 
 	var chunks = [];
 	var result;

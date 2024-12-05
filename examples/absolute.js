@@ -149,7 +149,7 @@ var docDefinition = {
 };
 
 var now = new Date();
-var pdfDoc = printer.createPdfKitDocument(docDefinition);
+var pdfDoc = await printer.createPdfKitDocument(docDefinition);
 pdfDoc.pipe(fs.createWriteStream('pdfs/absolute.pdf'));
 pdfDoc.end();
 console.log(new Date() - now);

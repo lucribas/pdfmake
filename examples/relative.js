@@ -67,7 +67,7 @@ var documentDefinition = {
 	]
 };
 
-var pdfDoc = printer.createPdfKitDocument(documentDefinition);
+var pdfDoc = await printer.createPdfKitDocument(documentDefinition);
 pdfDoc.pipe(fs.createWriteStream('pdfs/relative.pdf'));
 pdfDoc.end();
 

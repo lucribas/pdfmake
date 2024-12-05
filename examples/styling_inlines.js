@@ -62,6 +62,6 @@ var docDefinition = {
 	language: "en-AU"
 };
 
-var pdfDoc = printer.createPdfKitDocument(docDefinition);
+var pdfDoc = await printer.createPdfKitDocument(docDefinition);
 pdfDoc.pipe(fs.createWriteStream('pdfs/styling_inlines.pdf'));
 pdfDoc.end();
