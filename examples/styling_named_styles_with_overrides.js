@@ -38,6 +38,6 @@ var docDefinition = {
 	},
 };
 
-var pdfDoc = printer.createPdfKitDocument(docDefinition);
+var pdfDoc = await printer.createPdfKitDocument(docDefinition);
 pdfDoc.pipe(fs.createWriteStream('pdfs/named_styles_with_overrides.pdf'));
 pdfDoc.end();

@@ -84,7 +84,7 @@ TextTools.prototype.sizeOfString = function (text, styleContextStack) {
 	var italics = getStyleProperty({}, styleContextStack, 'italics', false);
 	var lineHeight = getStyleProperty({}, styleContextStack, 'lineHeight', 1);
 	var characterSpacing = getStyleProperty({}, styleContextStack, 'characterSpacing', 0);
-
+	// console.log("fontname="+fontName);
 	var font = this.fontProvider.provideFont(fontName, bold, italics);
 
 	return {
@@ -323,6 +323,8 @@ function measure(fontProvider, textArray, styleContextStack) {
 			fontSize *= 0.58;
 		}
 
+		// console.log("FontName 2 ="+fontName);
+		fontName='Roboto';
 		var font = fontProvider.provideFont(fontName, bold, italics);
 
 		item.width = widthOfString(item.text, font, fontSize, characterSpacing, fontFeatures);

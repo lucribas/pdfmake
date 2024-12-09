@@ -53,6 +53,6 @@ var docDefinition = {
 	content: ct
 };
 
-var pdfDoc = printer.createPdfKitDocument(docDefinition);
+var pdfDoc = await printer.createPdfKitDocument(docDefinition);
 pdfDoc.pipe(fs.createWriteStream(mp('./pdfs/textDecorations.pdf')));
 pdfDoc.end();

@@ -1,4 +1,8 @@
-var fonts = {
+
+
+async function main() {
+
+	var fonts = {
 	Roboto: {
 		normal: 'fonts/Roboto-Regular.ttf',
 		bold: 'fonts/Roboto-Medium.ttf',
@@ -18,6 +22,9 @@ var docDefinition = {
 	]
 };
 
-var pdfDoc = printer.createPdfKitDocument(docDefinition);
+var pdfDoc = await printer.createPdfKitDocument(docDefinition);
 pdfDoc.pipe(fs.createWriteStream('pdfs/basics.pdf'));
 pdfDoc.end();
+}
+
+main();

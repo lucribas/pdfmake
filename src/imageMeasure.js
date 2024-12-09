@@ -13,7 +13,8 @@ ImageMeasure.prototype.measureImage = async function (src) {
 
 	if (!this.pdfKitDoc._imageRegistry[src]) {
 		try {
-			image = this.pdfKitDoc.openImage(await realImageSrc(src));
+			const imageSrc = await realImageSrc(src);
+			image = await this.pdfKitDoc.openImage(imageSrc);
 			if (!image) {
 				throw 'No image';
 			}
@@ -27,6 +28,7 @@ ImageMeasure.prototype.measureImage = async function (src) {
 	}
 
 	var imageSize = { width: image.width, height: image.height };
+	// console.log("image size ="+JSON.stringify(imageSize));
 
 	if (typeof image === 'object' && image.constructor.name === 'JPEG') {
 		// If EXIF orientation calls for it, swap width and height
@@ -40,7 +42,12 @@ ImageMeasure.prototype.measureImage = async function (src) {
 	async function realImageSrc(src) {
 
 		if (typeof src === 'object' && src.read) {
-			return src.read();
+			// console.log("Encontrou src as obj..");
+			// return src.read();
+			return src;
+		} else {
+			console.log("ERROOOO "+JSON.stringify(src));
+
 		}
 
 		var img = that.imageDictionary[src];

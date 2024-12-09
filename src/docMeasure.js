@@ -54,11 +54,12 @@ DocMeasure.prototype.measureNode = async function (node) {
 		} else if (node.ol) {
 			return extendMargins(await self.measureOrderedList(node));
 		} else if (node.table) {
-			return extendMargins(self.measureTable(node));
+			return extendMargins(await self.measureTable(node));
 		} else if (node.text !== undefined) {
 			return extendMargins(self.measureLeaf(node));
 		} else if (node.toc) {
 			return extendMargins(await self.measureToc(node));
+		// } else if (node.image || node.image == "") {
 		} else if (node.image) {
 			return extendMargins(await self.measureImage(node));
 		} else if (node.svg) {
@@ -551,7 +552,7 @@ DocMeasure.prototype.measureColumns = async function (node) {
 	return node;
 };
 
-DocMeasure.prototype.measureTable = function (node) {
+DocMeasure.prototype.measureTable = async function (node) {
 	extendTableWidths(node);
 	node._layout = getLayout(this.tableLayouts);
 	node._offsets = getOffsets(node._layout);
@@ -576,7 +577,7 @@ DocMeasure.prototype.measureTable = function (node) {
 			}
 
 			if (!data._span) {
-				data = rowData[col] = this.styleStack.auto(data, measureCb(this, data));
+				data = rowData[col] = await this.styleStack.auto(data, measureCb(this, data));
 
 				if (data.colSpan && data.colSpan > 1) {
 					markSpans(rowData, col, data.colSpan);

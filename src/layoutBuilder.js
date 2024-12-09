@@ -408,6 +408,7 @@ LayoutBuilder.prototype.processNode = function (node) {
 			self.processLeaf(node);
 		} else if (node.toc) {
 			self.processToc(node);
+		// } else if (node.image || node.image == "") {
 		} else if (node.image) {
 			self.processImage(node);
 		} else if (node.svg) {

@@ -41,7 +41,7 @@ var docDefinition = {
 };
 
 var now = new Date();
-var pdfDoc = printer.createPdfKitDocument(docDefinition);
+var pdfDoc = await printer.createPdfKitDocument(docDefinition);
 pdfDoc.pipe(fs.createWriteStream('pdfs/links.pdf'));
 pdfDoc.end();
 
