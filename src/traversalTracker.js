@@ -7,7 +7,7 @@ function TraversalTracker() {
 TraversalTracker.prototype.startTracking = function (event, callback) {
 	var callbacks = this.events[event] || (this.events[event] = []);
 
-	if (callbacks.indexOf(callback) < 0) {
+	if (!callbacks.includes(callback)) {
 		callbacks.push(callback);
 	}
 };
@@ -25,23 +25,31 @@ TraversalTracker.prototype.stopTracking = function (event, callback) {
 	}
 };
 
-TraversalTracker.prototype.emit = function (event) {
-	var args = Array.prototype.slice.call(arguments, 1);
+TraversalTracker.prototype.emit = async function (event, ...args) {
 	var callbacks = this.events[event];
 
-	if (!callbacks) {
+	if (!callbacks || callbacks.length === 0) {
 		return;
 	}
 
-	callbacks.forEach(function (callback) {
-		callback.apply(this, args);
-	});
+	await Promise.all(
+		callbacks.map(async (callback) => {
+			try {
+				await callback(...args);
+			} catch (error) {
+				console.error(`Error in callback for event '${event}':`, error);
+			}
+		})
+	);
 };
 
 TraversalTracker.prototype.auto = function (event, callback, innerFunction) {
 	this.startTracking(event, callback);
-	innerFunction();
-	this.stopTracking(event, callback);
+	try {
+		innerFunction();
+	} finally {
+		this.stopTracking(event, callback);
+	}
 };
 
 module.exports = TraversalTracker;
