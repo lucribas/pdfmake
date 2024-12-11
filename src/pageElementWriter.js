@@ -19,34 +19,34 @@ function PageElementWriter(context, tracker) {
 	this.writer = new ElementWriter(context, tracker);
 }
 
-function fitOnPage(self, addFct) {
-	var position = addFct(self);
+async function fitOnPage(self, addFct) {
+	var position = await addFct(self);
 	if (!position) {
-		self.moveToNextPage();
+		await self.moveToNextPage();
 		position = addFct(self);
 	}
 	return position;
 }
 
-PageElementWriter.prototype.addLine = function (line, dontUpdateContextPosition, index) {
-	return fitOnPage(this, function (self) {
-		return self.writer.addLine(line, dontUpdateContextPosition, index);
+PageElementWriter.prototype.addLine = async function (line, dontUpdateContextPosition, index) {
+	return fitOnPage(this, async function (self) {
+		return await self.writer.addLine(line, dontUpdateContextPosition, index);
 	});
 };
 
-PageElementWriter.prototype.addImage = function (image, index) {
+PageElementWriter.prototype.addImage = async function (image, index) {
 	return fitOnPage(this, function (self) {
 		return self.writer.addImage(image, index);
 	});
 };
 
-PageElementWriter.prototype.addSVG = function (image, index) {
+PageElementWriter.prototype.addSVG = async function (image, index) {
 	return fitOnPage(this, function (self) {
 		return self.writer.addSVG(image, index);
 	});
 };
 
-PageElementWriter.prototype.addQr = function (qr, index) {
+PageElementWriter.prototype.addQr = async function (qr, index) {
 	return fitOnPage(this, function (self) {
 		return self.writer.addQr(qr, index);
 	});
@@ -68,16 +68,16 @@ PageElementWriter.prototype.alignCanvas = function (node) {
 	this.writer.alignCanvas(node);
 };
 
-PageElementWriter.prototype.addFragment = function (fragment, useBlockXOffset, useBlockYOffset, dontUpdateContextPosition) {
+PageElementWriter.prototype.addFragment = async function (fragment, useBlockXOffset, useBlockYOffset, dontUpdateContextPosition) {
 	if (!this.writer.addFragment(fragment, useBlockXOffset, useBlockYOffset, dontUpdateContextPosition)) {
-		this.moveToNextPage();
+		await this.moveToNextPage();
 		this.writer.addFragment(fragment, useBlockXOffset, useBlockYOffset, dontUpdateContextPosition);
 	}
 };
 
-PageElementWriter.prototype.moveToNextPage = function (pageOrientation) {
+PageElementWriter.prototype.moveToNextPage = async function (pageOrientation) {
 
-	var nextPage = this.writer.context.moveToNextPage(pageOrientation);
+	var nextPage = await this.writer.context.moveToNextPage(pageOrientation);
 
 	// moveToNextPage is called multiple times for table, because is called for each column
 	// and repeatables are inserted only in the first time. If columns are used, is needed
@@ -91,7 +91,7 @@ PageElementWriter.prototype.moveToNextPage = function (pageOrientation) {
 		}
 	}, this);
 
-	this.writer.tracker.emit('pageChanged', {
+	await this.writer.tracker.emit('pageChanged', {
 		prevPage: nextPage.prevPage,
 		prevY: nextPage.prevY,
 		y: this.writer.context.y

@@ -426,20 +426,20 @@ LayoutBuilder.prototype.processNode = function (node) {
 		}
 	});
 
-	function applyMargins(callback) {
+	async function applyMargins(callback) {
 		var margin = node._margin;
 
 		if (node.pageBreak === 'before') {
-			self.writer.moveToNextPage(node.pageOrientation);
+			await self.writer.moveToNextPage(node.pageOrientation);
 		} else if (node.pageBreak === 'beforeOdd') {
-			self.writer.moveToNextPage(node.pageOrientation);
+			await self.writer.moveToNextPage(node.pageOrientation);
 			if ((self.writer.context().page + 1) % 2 === 1) {
-				self.writer.moveToNextPage(node.pageOrientation);
+				await self.writer.moveToNextPage(node.pageOrientation);
 			}
 		} else if (node.pageBreak === 'beforeEven') {
-			self.writer.moveToNextPage(node.pageOrientation);
+			await self.writer.moveToNextPage(node.pageOrientation);
 			if ((self.writer.context().page + 1) % 2 === 0) {
-				self.writer.moveToNextPage(node.pageOrientation);
+				await self.writer.moveToNextPage(node.pageOrientation);
 			}
 		}
 
@@ -453,7 +453,7 @@ LayoutBuilder.prototype.processNode = function (node) {
 			if (availableHeight - margin[1] < 0) {
 				// Consume the whole available space
 				self.writer.context().moveDown(availableHeight);
-				self.writer.moveToNextPage(node.pageOrientation);
+				await self.writer.moveToNextPage(node.pageOrientation);
 				/**
 				 * TODO - Something to consider:
 				 * Right now the node starts at the top of next page (after header)
@@ -477,7 +477,7 @@ LayoutBuilder.prototype.processNode = function (node) {
 			// Necessary for nodes inside tables
 			if (availableHeight - margin[3] < 0) {
 				self.writer.context().moveDown(availableHeight);
-				self.writer.moveToNextPage(node.pageOrientation);
+				await self.writer.moveToNextPage(node.pageOrientation);
 				/**
 				 * TODO - Something to consider:
 				 * Right now next node starts at the top of next page (after header)
@@ -493,16 +493,16 @@ LayoutBuilder.prototype.processNode = function (node) {
 		}
 
 		if (node.pageBreak === 'after') {
-			self.writer.moveToNextPage(node.pageOrientation);
+			await self.writer.moveToNextPage(node.pageOrientation);
 		} else if (node.pageBreak === 'afterOdd') {
-			self.writer.moveToNextPage(node.pageOrientation);
+			await self.writer.moveToNextPage(node.pageOrientation);
 			if ((self.writer.context().page + 1) % 2 === 1) {
-				self.writer.moveToNextPage(node.pageOrientation);
+				await self.writer.moveToNextPage(node.pageOrientation);
 			}
 		} else if (node.pageBreak === 'afterEven') {
-			self.writer.moveToNextPage(node.pageOrientation);
+			await self.writer.moveToNextPage(node.pageOrientation);
 			if ((self.writer.context().page + 1) % 2 === 0) {
-				self.writer.moveToNextPage(node.pageOrientation);
+				await self.writer.moveToNextPage(node.pageOrientation);
 			}
 		}
 	}
@@ -727,7 +727,7 @@ LayoutBuilder.prototype._getRowSpanEndingCell = function (tableBody, rowIndex, c
 	return null;
 };
 
-LayoutBuilder.prototype.processRow = function ({ marginX = [0, 0], dontBreakRows = false, rowsWithoutPageBreak = 0, cells, widths, gaps, tableNode, tableBody, rowIndex, height }) {
+LayoutBuilder.prototype.processRow = async function ({ marginX = [0, 0], dontBreakRows = false, rowsWithoutPageBreak = 0, cells, widths, gaps, tableNode, tableBody, rowIndex, height }) {
 	var self = this;
 	var isUnbreakableRow = dontBreakRows || rowIndex <= rowsWithoutPageBreak - 1;
 	var pageBreaks = [];
@@ -836,7 +836,7 @@ LayoutBuilder.prototype.processRow = function ({ marginX = [0, 0], dontBreakRows
 	// If content did not break page, check if we should break by height
 	if (willBreakByHeight && !isUnbreakableRow && pageBreaks.length === 0) {
 		this.writer.context().moveDown(this.writer.context().availableHeight);
-		this.writer.moveToNextPage();
+		await this.writer.moveToNextPage();
 	}
 
 	var bottomByPage = this.writer.context().completeColumnGroup(height, endingSpanCell);
@@ -883,7 +883,7 @@ LayoutBuilder.prototype.processList = function (orderedList, node) {
 
 	this.writer.context().addMargin(-gapSize.width);
 
-	function addMarkerToFirstLeaf(line) {
+	async function addMarkerToFirstLeaf(line) {
 		// I'm not very happy with the way list processing is implemented
 		// (both code and algorithm should be rethinked)
 		if (nextMarker) {
@@ -900,7 +900,7 @@ LayoutBuilder.prototype.processList = function (orderedList, node) {
 				markerLine.addInline(marker._inlines[0]);
 				markerLine.x = -marker._minWidth;
 				markerLine.y = line.getAscenderHeight() - markerLine.getAscenderHeight();
-				self.writer.addLine(markerLine, true);
+				await self.writer.addLine(markerLine, true);
 			}
 		}
 	}
@@ -976,7 +976,7 @@ LayoutBuilder.prototype.processTable = function (tableNode) {
 };
 
 // leafs (texts)
-LayoutBuilder.prototype.processLeaf = function (node) {
+LayoutBuilder.prototype.processLeaf = async function (node) {
 	var line = this.buildNextLine(node);
 	if (line && (node.tocItem || node.id)) {
 		line._node = node;
@@ -1012,7 +1012,7 @@ LayoutBuilder.prototype.processLeaf = function (node) {
 	}
 
 	while (line && (maxHeight === -1 || currentHeight < maxHeight)) {
-		var positions = this.writer.addLine(line);
+		var positions = await this.writer.addLine(line);
 		node.positions.push(positions);
 		line = this.buildNextLine(node);
 		if (line) {
@@ -1095,14 +1095,14 @@ LayoutBuilder.prototype.processSVG = function (node) {
 	node.positions.push(position);
 };
 
-LayoutBuilder.prototype.processCanvas = function (node) {
+LayoutBuilder.prototype.processCanvas = async function (node) {
 	var height = node._minHeight;
 
 	if (node.absolutePosition === undefined && this.writer.context().availableHeight < height) {
 		// TODO: support for canvas larger than a page
 		// TODO: support for other overflow methods
 
-		this.writer.moveToNextPage();
+		await this.writer.moveToNextPage();
 	}
 
 	this.writer.alignCanvas(node);

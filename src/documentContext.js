@@ -7,7 +7,7 @@ var isString = require('./helpers').isString;
  * Creates an instance of DocumentContext - a store for current x, y positions and available width/height.
  * It facilitates column divisions and vertical sync
  */
-function DocumentContext(pageSize, pageMargins) {
+async function DocumentContext(pageSize, pageMargins) {
 	this.pages = [];
 
 	this.pageMargins = pageMargins;
@@ -23,7 +23,7 @@ function DocumentContext(pageSize, pageMargins) {
 
 	this.backgroundLength = [];
 
-	this.addPage(pageSize);
+	await this.addPage(pageSize);
 }
 
 DocumentContext.prototype.beginColumnGroup = function (marginXTopParent, bottomByPage = {}) {
@@ -239,7 +239,7 @@ var getPageSize = function (currentPage, newPageOrientation) {
 };
 
 
-DocumentContext.prototype.moveToNextPage = function (pageOrientation) {
+DocumentContext.prototype.moveToNextPage = async function (pageOrientation) {
 	var nextPageIndex = this.page + 1;
 
 	var prevPage = this.page;
@@ -261,7 +261,7 @@ DocumentContext.prototype.moveToNextPage = function (pageOrientation) {
 		var currentPageOrientation = this.getCurrentPage().pageSize.orientation;
 
 		var pageSize = getPageSize(this.getCurrentPage(), pageOrientation);
-		this.addPage(pageSize);
+		await this.addPage(pageSize);
 
 		if (currentPageOrientation === pageSize.orientation) {
 			this.availableWidth = currentAvailableWidth;
@@ -280,14 +280,14 @@ DocumentContext.prototype.moveToNextPage = function (pageOrientation) {
 };
 
 
-DocumentContext.prototype.addPage = function (pageSize) {
+DocumentContext.prototype.addPage = async function (pageSize) {
 	var page = { items: [], pageSize: pageSize };
 	this.pages.push(page);
 	this.backgroundLength.push(0);
 	this.page = this.pages.length - 1;
 	this.initializePage();
 
-	this.tracker.emit('pageAdded');
+	await this.tracker.emit('pageAdded');
 
 	return page;
 };

@@ -375,7 +375,7 @@ function updatePageOrientationInOptions(currentPage, pdfKitDoc) {
 
 async function renderPages(pages, fontProvider, pdfKitDoc, patterns, progressCallback) {
 	pdfKitDoc._pdfMakePages = pages;
-	pdfKitDoc.addPage();
+	await pdfKitDoc.addPage();
 
 	var totalItems = 0;
 	if (progressCallback) {
@@ -391,7 +391,7 @@ async function renderPages(pages, fontProvider, pdfKitDoc, patterns, progressCal
 	for (var i = 0; i < pages.length; i++) {
 		if (i > 0) {
 			updatePageOrientationInOptions(pages[i], pdfKitDoc);
-			pdfKitDoc.addPage(pdfKitDoc.options);
+			await pdfKitDoc.addPage(pdfKitDoc.options);
 		}
 
 		var page = pages[i];

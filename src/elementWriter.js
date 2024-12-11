@@ -24,7 +24,7 @@ function addPageItem(page, item, index) {
 	}
 }
 
-ElementWriter.prototype.addLine = function (line, dontUpdateContextPosition, index) {
+ElementWriter.prototype.addLine = async function (line, dontUpdateContextPosition, index) {
 	var height = line.getHeight();
 	var context = this.context;
 	var page = context.getCurrentPage(),
@@ -43,7 +43,7 @@ ElementWriter.prototype.addLine = function (line, dontUpdateContextPosition, ind
 		type: 'line',
 		item: line
 	}, index);
-	this.tracker.emit('lineAdded', line);
+	await this.tracker.emit('lineAdded', line);
 
 	if (!dontUpdateContextPosition) {
 		context.moveDown(height);
