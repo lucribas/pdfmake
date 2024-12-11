@@ -29,6 +29,14 @@ ImageMeasure.prototype.measureImage = function (src) {
 	return { width: image.width, height: image.height };
 
 	function realImageSrc(src) {
+
+		if (typeof src === 'object' && src.read) {
+			// console.log("Encontrou src as obj..");
+			return src.read;
+		} else {
+			console.log("ERROOOO "+JSON.stringify(src));
+
+		}
 		var img = that.imageDictionary[src];
 
 		if (!img) {
