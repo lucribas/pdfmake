@@ -49721,7 +49721,7 @@ var isFunction = (__webpack_require__(91867).isFunction);
 var isUndefined = (__webpack_require__(91867).isUndefined);
 //var isNull = require('../helpers').isNull;
 var pack = (__webpack_require__(91867).pack);
-var FileSaver = __webpack_require__(35003);
+var FileSaver = __webpack_require__(17123);
 var saveAs = FileSaver.saveAs;
 
 var defaultClientFonts = {
@@ -52340,9 +52340,6 @@ ImageMeasure.prototype.measureImage = function (src) {
 		if (typeof src === 'object' && src.read) {
 			// console.log("Encontrou src as obj..");
 			return src.read;
-		} else {
-			console.log("ERROOOO "+JSON.stringify(src));
-
 		}
 		var img = that.imageDictionary[src];
 
@@ -52663,7 +52660,7 @@ function _interopDefault(ex) {
 	return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex;
 }
 
-var PdfKit = _interopDefault(__webpack_require__(5783));
+var PdfKit = _interopDefault(__webpack_require__(27297));
 
 function getEngineInstance() {
 	return PdfKit;
@@ -55716,7 +55713,7 @@ module.exports = TraversalTracker;
 
 /***/ }),
 
-/***/ 35003:
+/***/ 17123:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(a,b){if(true)!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (b),
@@ -68390,7 +68387,7 @@ module.exports = LineBreaker;
 
 /***/ }),
 
-/***/ 5783:
+/***/ 27297:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
